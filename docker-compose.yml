@@ -41,6 +41,7 @@ services:
       - ./data/rafazingano/mautic:/var/www/html
     environment:
       - VIRTUAL_HOST=mkt.rafazingano.com.br
+      - CERT_NAME=rafazingano
     networks:
       - confraria
 
