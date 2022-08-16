@@ -1,0 +1,47 @@
+version: '3.2'
+services:
+
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: "nginx-proxy"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - confraria
+
+  mysql:
+    image: mysql
+    container_name: "mysql"
+    ports:
+      - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_HOST: mysql.localhost
+      MYSQL_ROOT_PASSWORD: 123456789
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    networks:
+      - confraria
+
+  mautic-rafazingano:
+    image: confrariaweb/mautic-server
+    container_name: mautic-rafazingano
+    build:
+      context: ./images
+      dockerfile: Mautic.Dockerfile
+    ports:
+      - "80"
+    restart: always
+    volumes:
+      - ./data/rafazingano/mautic:/var/www/html
+    environment:
+      - VIRTUAL_HOST=mkt.rafazingano.com.br
+    networks:
+      - confraria
+
+networks:
+  confraria:
+    driver: "bridge"
