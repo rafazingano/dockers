@@ -9,6 +9,8 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./data/certs/rafazingano:/etc/nginx/certs
+    networks:
       - confraria
 
   mysql:
