@@ -19,6 +19,7 @@ services:
      image: wordpress:latest
      expose:
        - 80
+       - 443
      restart: always
      environment:
        VIRTUAL_HOST: novo.rafazingano.com.br
