@@ -48,3 +48,4 @@ services:
 networks:
   confraria:
     driver: "bridge"
+    external: true
