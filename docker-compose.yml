@@ -9,7 +9,6 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ./data/certs:/etc/nginx/certs
     networks:
       - confraria
 
@@ -40,8 +39,7 @@ services:
     volumes:
       - ./data/rafazingano/mautic:/var/www/html
     environment:
-      - VIRTUAL_HOST=mkt.rafazingano.com.br
-      - CERT_NAME=rafazingano
+      - VIRTUAL_HOST=novo.rafazingano.com.br
     networks:
       - confraria
 
